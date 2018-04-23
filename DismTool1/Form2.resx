@@ -1,0 +1,149 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="RichTextBox1.Text" xml:space="preserve">
+    <value>/Cleanup-Image {/RevertPendingActions | /SPSuperseded [/HideSP] | /StartComponentCleanup [/ResetBase] | /AnalyzeComponentStore | /CheckHealth | /ScanHealth | /RestoreHealth [/Source: &lt;filepath&gt;] [/LimitAccess]}
+Performs cleanup or recovery operations on the image.
+If you experience a boot failure, you can use the /RevertPendingActions option to try to recover the system. The operation reverts all pending actions from the previous servicing operations because these actions might be the cause of the boot failure. The /RevertPendingActions option is not supported on a running operating system or a Windows PE or Windows Recovery Environment (Windows RE) image.
+ImportantImportant
+You should use the /RevertPendingActions option only in a system-recovery scenario on a Windows image that did not boot.
+Use /SPSuperseded to remove any backup files created during the installation of a service pack. Use /HideSP to prevent the service pack from being listed in the Installed Updates Control Panel.
+ImportantImportant
+The service pack cannot be uninstalled after the /SPSuperseded operation is completed.
+Use /StartComponentCleanup to clean up the superseded components and reduce the size of the component store. Use /ResetBase to reset the base of superseded components, which can further reduce the component store size.
+WarningWarning
+Installed Windows updates can’t be uninstalled after running /StartComponentCleanup with the /ResetBase option.
+Use /AnalyzeComponentStore to create a report of the component store. For more information about the report and how to use the information provided in the report, see http://go.microsoft.com/fwlink/?LinkId=293367.
+Use /CheckHealth to check whether the image has been flagged as corrupted by a failed process and whether the corruption can be repaired.
+Use /ScanHealth to scan the image for component store corruption. This operation will take several minutes.
+Use /RestoreHealth to scan the image for component store corruption, and then perform repair operations automatically. This operation will take several minutes.
+Use /Source with /RestoreHealth to specify the location of known good versions of files that can be used for the repair, such as a path to the Windows directory of a mounted image.
+If you specify multiple /Source arguments, the files are gathered from the first location where they are found and the rest of the locations are ignored. If you do not specify a /Source for a feature that has been removed, the default location in the registry is used or Windows Update (WU) is used for online images.
+Use /LimitAccess to prevent DISM from contacting WU for repair of online images.
+/AnalyzeComponentStore and /ResetBase can’t be used when servicing a version of Windows that is earlier than Windows 8.1 or Windows Server 2012 R2 images.
+/StartComponentCleanup can’t be used when servicing a version of Windows that is earlier than Windows 8 or Windows Server 2012 images.
+/CheckHealth, /ScanHealth, /RestoreHealth, /Source, and /LimitAccess can’t be used when servicing a version of Windows that is earlier than Windows 8 or Windows Server 2012 images.
+/HideSP and /SPSuperseded can’t be used when servicing a version of Windows that is earlier than Windows® 7 Service Pack 1 (SP1) image.
+Examples:
+Dism /Image:C:\test\offline /Cleanup-Image /RevertPendingActions
+Dism /Image:C:\test\offline /Cleanup-Image /SPSuperseded /HideSP
+Dism /Online /Cleanup-Image /ScanHealth
+Dism /Online /Cleanup-Image /RestoreHealth /Source:c:\test\mount\windows /LimitAccess</value>
+  </data>
+</root>
