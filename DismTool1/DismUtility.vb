@@ -5,20 +5,14 @@ Imports Microsoft.Win32.Registry
 Imports System.Environment
 Imports System
 Imports System.Management
+Imports System.Collections
 Imports Microsoft.VisualBasic.FileIO.FileSystem
 
-
-
 Public Class DismUtility
-
     Dim apppath As String = IO.Directory.GetParent(Application.ExecutablePath).FullName
-    Dim libpath32 As String = apppath & "\lib\x32\"
-    Dim libpath64 As String = apppath & "\lib\x64\"
-    Dim path2 As String = System.IO.Path.GetFullPath()
-
-
     Dim a As String = System.Environment.MachineName.ToString
-    Dim libpath As String
+    Dim b As String = System.Environment.OSVersion.GetType.GetProperties.ToString
+    Dim libpath, dismpath, imagexpath, bcdpath, oscdpath As String
     Dim Sysinfo As String
     Dim disminfo, dinfo As String
     Dim OS1 As String
@@ -30,9 +24,9 @@ Public Class DismUtility
     Dim dsmargs As String
     Dim selfiledlg As New OpenFileDialog
     Dim imageloc As String
-    Dim dismpth As String
     Dim ofdlg1 As New OpenFileDialog
     Dim mtfolder As New FolderBrowserDialog
+
 
     Public Function dismcommands()
         Dim mtpath As String = at2.Text
@@ -57,17 +51,38 @@ Public Class DismUtility
 
     Public Function OsBit()
         Sysinfo = Environment.CurrentDirectory()
+        '''' This command below processes the query whether WAIK is installed in local computer and then defined the path for further commands to work '''''
+
+        Dim librarypath As String
         If System.Environment.Is64BitOperatingSystem = True Then
-            ' MessageBox.Show("OS System : 64 Bit Operating System")
-            libpath = libpath64
+            librarypath = Path.GetFullPath("C:\Program Files (x86)\Windows Kits\10\Assessment And Deployment Kit\Deployment Tools\amd64\")
             OS1 = "64 Bit Operating system"
+            If Directory.Exists(librarypath) Then
+                ' This path is a directory.
+                libpath = librarypath
+            Else
+                MsgBox("WAIK not Found, Please Install Image & Deployment Toolkit from WAIK")
+                Exit Function
+            End If
         Else
-            ' MessageBox.Show("OS System : 32 Bit Operating System")
-            libpath = libpath32
+            librarypath = Path.GetFullPath("C:\Program Files (x86)\Windows Kits\10\Assessment And Deployment Kit\Deployment Tools\x86\")
             OS1 = "32 Bit Operating system"
+            If Directory.Exists(librarypath) Then
+                ' This path is a directory.
+                libpath = librarypath
+            Else
+                MsgBox("WAIK not Found, Please Install Image & Deployment Toolkit from WAIK")
+                Exit Function
+            End If
         End If
-        Dim dismpath = "DISM.exe"
-        dismpth = dismpath
+
+
+        dismpath = libpath & "Dism\Dism.exe"
+        imagexpath = libpath & "Dism\imagex.exe"
+        bcdpath = libpath & "BCDboot\"
+        oscdpath = libpath & "Oscdimg\"
+
+
         Dim di = FileVersionInfo.GetVersionInfo(dismpath)
         dinfo = di.ToString
         disminfo = di.FileDescription & " " & di.FileVersion
@@ -76,16 +91,20 @@ Public Class DismUtility
         Return disminfo
         Return OS1
         Return dinfo
-        Return dismpth
+        Return dismpath
+        Return imagexpath
+        Return bcdpath
+        Return oscdpath
+
     End Function
 
     Public Function apply1()
         If rb1.Checked = True Then
-            Tb1.AppendText("You have selected to use DISM tools on the mounted image")
-            Tb1.AppendText(vbNewLine)
+            tb1.AppendText("You have selected to use DISM tools on the mounted image")
+            tb1.AppendText(vbNewLine)
         ElseIf rb2.Checked = True Then
-            Tb1.AppendText("You have selected to use DISM tools on installed windows")
-            Tb1.AppendText(vbNewLine)
+            tb1.AppendText("You have selected to use DISM tools on installed windows")
+            tb1.AppendText(vbNewLine)
         End If
     End Function
 
@@ -95,7 +114,7 @@ Public Class DismUtility
         Dim A, B, C, D
         With p
             .UseShellExecute = False
-            .FileName = dismpth
+            .FileName = dismpath
             .Arguments = imageloc & " /loglevel:2 /Get-packages /Format:table"
             .CreateNoWindow = True
             .RedirectStandardOutput = True
@@ -132,8 +151,8 @@ Public Class DismUtility
     Private Sub DismUtility_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Timer1.Start()
         OsBit()
-        Tb1.Text = "Date: " & Now.ToLongDateString & vbNewLine & "Time: " & Now.ToLongTimeString & vbNewLine & "Computer name: " & a & vbNewLine & vbNewLine
-        Tb1.AppendText(Me.Name & " is running on a " & OS1 & ", Accordingly the corresponding version of DISM utility has been loaded" & vbNewLine & "DISM details" & vbNewLine & dinfo & vbNewLine)
+        tb1.Text = "Date: " & Now.ToLongDateString & vbNewLine & "Time: " & Now.ToLongTimeString & vbNewLine & "Computer name: " & a & vbNewLine & b & vbNewLine
+        tb1.AppendText(Me.Name & " is running on a " & OS1 & ", Accordingly the corresponding version of DISM utility has been loaded" & vbNewLine & "DISM details" & vbNewLine & dinfo & vbNewLine)
         ' TextBox2.Text = "Date: " & Now.ToLongDateString & vbNewLine & "Time: " & Now.ToLongTimeString
         'MsgBox(a)
         tb1.ScrollToCaret()
@@ -170,15 +189,15 @@ Public Class DismUtility
 
     Private Sub rb2_CheckedChanged(sender As Object, e As EventArgs) Handles rb2.CheckedChanged
         If rb2.Checked = True Then
-            Tb1.AppendText("You have selected to use DISM tools on installed windows" & vbNewLine)
-            Tb1.AppendText(vbNewLine)
+            tb1.AppendText("You have selected to use DISM tools on installed windows" & vbNewLine)
+            tb1.AppendText(vbNewLine)
         End If
         tb1.ScrollToCaret()
     End Sub
 
     Private Sub rb1_CheckedChanged(sender As Object, e As EventArgs) Handles rb1.CheckedChanged
         If rb1.Checked = True Then
-            Tb1.AppendText("You have selected to use DISM tools on the mounted image" & vbNewLine)
+            tb1.AppendText("You have selected to use DISM tools on the mounted image" & vbNewLine)
             tb1.AppendText(vbNewLine)
         End If
         tb1.ScrollToCaret()
@@ -197,7 +216,7 @@ Public Class DismUtility
         End With
         With p
             .UseShellExecute = False
-            .FileName = libpath & "bcdboot.exe"
+            .FileName = bcdpath & "bcdboot.exe"
             .Arguments = "/Help"
             .CreateNoWindow = True
             .RedirectStandardOutput = True
@@ -231,7 +250,7 @@ Public Class DismUtility
         Dim p As New ProcessStartInfo
         With p
             .UseShellExecute = False
-            .FileName = libpath & "imagex.exe"
+            .FileName = imagexpath
             .Arguments = "/Help"
             .CreateNoWindow = True
             .RedirectStandardOutput = True
@@ -266,7 +285,7 @@ Public Class DismUtility
         End With
         With p
             .UseShellExecute = False
-            .FileName = libpath & "dism.exe"
+            .FileName = dismpath
             .Arguments = "/get-Help"
             .CreateNoWindow = True
             .RedirectStandardOutput = True
@@ -299,7 +318,7 @@ Public Class DismUtility
         End With
         With p
             .UseShellExecute = False
-            .FileName = libpath & "BcdEdit.exe"
+            .FileName = bcdpath & "BcdEdit.exe"
             .Arguments = "/Help"
             .CreateNoWindow = True
             .RedirectStandardOutput = True
@@ -333,7 +352,7 @@ Public Class DismUtility
 
         With p
             .UseShellExecute = False
-            .FileName = libpath & "BootSect.exe"
+            .FileName = bcdpath & "BootSect.exe"
             .Arguments = "/Help"
             .CreateNoWindow = True
             .RedirectStandardOutput = True
@@ -370,7 +389,7 @@ Public Class DismUtility
 
         With p
             .UseShellExecute = False
-            .FileName = libpath & "Oscdimg.exe"
+            .FileName = oscdpath & "Oscdimg.exe"
             .Arguments = "/Help"
             .CreateNoWindow = True
             .RedirectStandardOutput = True
@@ -389,6 +408,7 @@ Public Class DismUtility
         End With
         pro.Dispose()
         pro.Close()
+
     End Sub
 
     Private Sub bb1_Click(sender As Object, e As EventArgs) Handles bb1.Click
@@ -440,7 +460,7 @@ Public Class DismUtility
         tb1.AppendText(vbNewLine)
         With p
             .UseShellExecute = False
-            .FileName = dismpth
+            .FileName = dismpath
             .Arguments = " /Get-WimInfo /WimFile:" & filename & " /Index:" & ct
             .CreateNoWindow = True
             .RedirectStandardOutput = True
@@ -491,7 +511,7 @@ Public Class DismUtility
         tb1.AppendText(vbNewLine)
         With p
             .UseShellExecute = False
-            .FileName = dismpth
+            .FileName = dismpath
             .Arguments = " /get-mountedwiminfo"
             .CreateNoWindow = True
             .RedirectStandardOutput = True
@@ -565,7 +585,7 @@ Public Class DismUtility
         Dim filepath = PT1.Text
         With p
             .UseShellExecute = False
-            .FileName = dismpth
+            .FileName = dismpath
             .Arguments = imageloc & " /add-package /packagepath:" & filepath
             .CreateNoWindow = True
             .RedirectStandardOutput = True
@@ -593,7 +613,7 @@ Public Class DismUtility
         Dim filepath = pt3.Text
         With p
             .UseShellExecute = False
-            .FileName = dismpth
+            .FileName = dismpath
             .Arguments = imageloc & " /Remove-Package /PackageName:" & filepath
             .CreateNoWindow = True
             .RedirectStandardOutput = True
@@ -635,7 +655,7 @@ Public Class DismUtility
 
         With p
             .UseShellExecute = False
-            .FileName = dismpth
+            .FileName = dismpath
             If drb1.Checked = True Then
                 .Arguments = imageloc & " /Get-Drivers /Format:Table"
             ElseIf drb2.Checked = True Then
@@ -674,7 +694,7 @@ Public Class DismUtility
         dt1.Text = path
         With p
             .UseShellExecute = False
-            .FileName = dismpth
+            .FileName = dismpath
             .Arguments = imageloc & " /Export-Driver /Destination:" & path
             .CreateNoWindow = True
             .RedirectStandardOutput = True
@@ -718,7 +738,7 @@ Public Class DismUtility
         tb1.AppendText(vbNewLine)
         With p
             .UseShellExecute = False
-            .FileName = dismpth
+            .FileName = dismpath
             .Arguments = " /Get-WimInfo /WimFile:" & filename
             .CreateNoWindow = True
             .RedirectStandardOutput = True
