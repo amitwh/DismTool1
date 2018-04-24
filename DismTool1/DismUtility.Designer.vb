@@ -78,6 +78,7 @@ Partial Class DismUtility
         Me.drb2 = New System.Windows.Forms.RadioButton()
         Me.drb1 = New System.Windows.Forms.RadioButton()
         Me.dt2 = New System.Windows.Forms.TextBox()
+        Me.Label8 = New System.Windows.Forms.Label()
         Me.Label6 = New System.Windows.Forms.Label()
         Me.db6 = New System.Windows.Forms.Button()
         Me.dt4 = New System.Windows.Forms.TextBox()
@@ -87,8 +88,6 @@ Partial Class DismUtility
         Me.db5 = New System.Windows.Forms.Button()
         Me.db1 = New System.Windows.Forms.Button()
         Me.TabPage4 = New System.Windows.Forms.TabPage()
-        Me.SplitContainer3 = New System.Windows.Forms.SplitContainer()
-        Me.gb5 = New System.Windows.Forms.GroupBox()
         Me.TabPage5 = New System.Windows.Forms.TabPage()
         Me.TabPage6 = New System.Windows.Forms.TabPage()
         Me.TabPage7 = New System.Windows.Forms.TabPage()
@@ -101,7 +100,6 @@ Partial Class DismUtility
         Me.pkgworker2 = New System.ComponentModel.BackgroundWorker()
         Me.DrvWorker1 = New System.ComponentModel.BackgroundWorker()
         Me.DrvWorker2 = New System.ComponentModel.BackgroundWorker()
-        Me.Label8 = New System.Windows.Forms.Label()
         Me.MenuStrip1.SuspendLayout()
         Me.StatusStrip1.SuspendLayout()
         Me.GroupBox5.SuspendLayout()
@@ -113,10 +111,6 @@ Partial Class DismUtility
         Me.TabPage3.SuspendLayout()
         Me.gb3.SuspendLayout()
         Me.Panel2.SuspendLayout()
-        Me.TabPage4.SuspendLayout()
-        CType(Me.SplitContainer3, System.ComponentModel.ISupportInitialize).BeginInit()
-        Me.SplitContainer3.Panel1.SuspendLayout()
-        Me.SplitContainer3.SuspendLayout()
         Me.SuspendLayout()
         '
         'MenuStrip1
@@ -636,6 +630,16 @@ Partial Class DismUtility
         Me.dt2.Size = New System.Drawing.Size(505, 21)
         Me.dt2.TabIndex = 46
         '
+        'Label8
+        '
+        Me.Label8.AutoSize = True
+        Me.Label8.Font = New System.Drawing.Font("Verdana", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label8.Location = New System.Drawing.Point(28, 27)
+        Me.Label8.Name = "Label8"
+        Me.Label8.Size = New System.Drawing.Size(192, 13)
+        Me.Label8.TabIndex = 55
+        Me.Label8.Text = "Installed Driver Information"
+        '
         'Label6
         '
         Me.Label6.AutoSize = True
@@ -715,42 +719,18 @@ Partial Class DismUtility
         '
         'TabPage4
         '
-        Me.TabPage4.Controls.Add(Me.SplitContainer3)
         Me.TabPage4.Location = New System.Drawing.Point(4, 22)
         Me.TabPage4.Name = "TabPage4"
-        Me.TabPage4.Size = New System.Drawing.Size(709, 299)
+        Me.TabPage4.Size = New System.Drawing.Size(709, 266)
         Me.TabPage4.TabIndex = 3
         Me.TabPage4.Text = "Features"
         Me.TabPage4.UseVisualStyleBackColor = True
-        '
-        'SplitContainer3
-        '
-        Me.SplitContainer3.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.SplitContainer3.Location = New System.Drawing.Point(0, 0)
-        Me.SplitContainer3.Name = "SplitContainer3"
-        '
-        'SplitContainer3.Panel1
-        '
-        Me.SplitContainer3.Panel1.Controls.Add(Me.gb5)
-        Me.SplitContainer3.Size = New System.Drawing.Size(709, 299)
-        Me.SplitContainer3.SplitterDistance = 403
-        Me.SplitContainer3.TabIndex = 0
-        '
-        'gb5
-        '
-        Me.gb5.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.gb5.Location = New System.Drawing.Point(0, 0)
-        Me.gb5.Name = "gb5"
-        Me.gb5.Size = New System.Drawing.Size(403, 299)
-        Me.gb5.TabIndex = 0
-        Me.gb5.TabStop = False
-        Me.gb5.Text = "GroupBox1"
         '
         'TabPage5
         '
         Me.TabPage5.Location = New System.Drawing.Point(4, 22)
         Me.TabPage5.Name = "TabPage5"
-        Me.TabPage5.Size = New System.Drawing.Size(709, 299)
+        Me.TabPage5.Size = New System.Drawing.Size(709, 266)
         Me.TabPage5.TabIndex = 4
         Me.TabPage5.Text = "ImageFinalisation"
         Me.TabPage5.UseVisualStyleBackColor = True
@@ -759,7 +739,7 @@ Partial Class DismUtility
         '
         Me.TabPage6.Location = New System.Drawing.Point(4, 22)
         Me.TabPage6.Name = "TabPage6"
-        Me.TabPage6.Size = New System.Drawing.Size(709, 299)
+        Me.TabPage6.Size = New System.Drawing.Size(709, 266)
         Me.TabPage6.TabIndex = 5
         Me.TabPage6.Text = "OtherImageCommands"
         Me.TabPage6.UseVisualStyleBackColor = True
@@ -768,7 +748,7 @@ Partial Class DismUtility
         '
         Me.TabPage7.Location = New System.Drawing.Point(4, 22)
         Me.TabPage7.Name = "TabPage7"
-        Me.TabPage7.Size = New System.Drawing.Size(709, 299)
+        Me.TabPage7.Size = New System.Drawing.Size(709, 266)
         Me.TabPage7.TabIndex = 6
         Me.TabPage7.Text = "SetupWindows"
         Me.TabPage7.UseVisualStyleBackColor = True
@@ -777,7 +757,7 @@ Partial Class DismUtility
         '
         Me.TabPage8.Location = New System.Drawing.Point(4, 22)
         Me.TabPage8.Name = "TabPage8"
-        Me.TabPage8.Size = New System.Drawing.Size(709, 299)
+        Me.TabPage8.Size = New System.Drawing.Size(709, 266)
         Me.TabPage8.TabIndex = 7
         Me.TabPage8.Text = "OscdImgTools"
         Me.TabPage8.UseVisualStyleBackColor = True
@@ -786,7 +766,7 @@ Partial Class DismUtility
         '
         Me.TabPage9.Location = New System.Drawing.Point(4, 22)
         Me.TabPage9.Name = "TabPage9"
-        Me.TabPage9.Size = New System.Drawing.Size(709, 299)
+        Me.TabPage9.Size = New System.Drawing.Size(709, 266)
         Me.TabPage9.TabIndex = 8
         Me.TabPage9.Text = "BootRelatedTools"
         Me.TabPage9.UseVisualStyleBackColor = True
@@ -795,7 +775,7 @@ Partial Class DismUtility
         '
         Me.Label1.AutoSize = True
         Me.Label1.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label1.Location = New System.Drawing.Point(9, 396)
+        Me.Label1.Location = New System.Drawing.Point(9, 378)
         Me.Label1.Name = "Label1"
         Me.Label1.Size = New System.Drawing.Size(143, 13)
         Me.Label1.TabIndex = 11
@@ -810,10 +790,10 @@ Partial Class DismUtility
         Me.tb1.AutoWordSelection = True
         Me.tb1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.tb1.Font = New System.Drawing.Font("Courier New", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.tb1.Location = New System.Drawing.Point(12, 412)
+        Me.tb1.Location = New System.Drawing.Point(12, 394)
         Me.tb1.Name = "tb1"
         Me.tb1.ReadOnly = True
-        Me.tb1.Size = New System.Drawing.Size(713, 124)
+        Me.tb1.Size = New System.Drawing.Size(713, 142)
         Me.tb1.TabIndex = 12
         Me.tb1.Text = ""
         '
@@ -840,16 +820,6 @@ Partial Class DismUtility
         '
         Me.DrvWorker2.WorkerReportsProgress = True
         Me.DrvWorker2.WorkerSupportsCancellation = True
-        '
-        'Label8
-        '
-        Me.Label8.AutoSize = True
-        Me.Label8.Font = New System.Drawing.Font("Verdana", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label8.Location = New System.Drawing.Point(28, 27)
-        Me.Label8.Name = "Label8"
-        Me.Label8.Size = New System.Drawing.Size(192, 13)
-        Me.Label8.TabIndex = 55
-        Me.Label8.Text = "Installed Driver Information"
         '
         'DismUtility
         '
@@ -891,10 +861,6 @@ Partial Class DismUtility
         Me.gb3.PerformLayout()
         Me.Panel2.ResumeLayout(False)
         Me.Panel2.PerformLayout()
-        Me.TabPage4.ResumeLayout(False)
-        Me.SplitContainer3.Panel1.ResumeLayout(False)
-        CType(Me.SplitContainer3, System.ComponentModel.ISupportInitialize).EndInit()
-        Me.SplitContainer3.ResumeLayout(False)
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -956,8 +922,6 @@ Partial Class DismUtility
     Friend WithEvents pkgworker1 As System.ComponentModel.BackgroundWorker
     Friend WithEvents ToolTip1 As System.Windows.Forms.ToolTip
     Friend WithEvents pkgworker2 As System.ComponentModel.BackgroundWorker
-    Friend WithEvents SplitContainer3 As SplitContainer
-    Friend WithEvents gb5 As GroupBox
     Friend WithEvents DrvWorker1 As System.ComponentModel.BackgroundWorker
     Friend WithEvents DrvWorker2 As System.ComponentModel.BackgroundWorker
     Friend WithEvents gb3 As GroupBox
@@ -977,6 +941,6 @@ Partial Class DismUtility
     Friend WithEvents db5 As Button
     Friend WithEvents db1 As Button
     Friend WithEvents TabPage2 As TabPage
-    Friend WithEvents Panel2 As Panel
     Friend WithEvents Label8 As Label
+    Friend WithEvents Panel2 As Panel
 End Class

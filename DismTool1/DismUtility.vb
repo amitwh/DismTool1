@@ -1,9 +1,16 @@
-﻿Imports System.Diagnostics
+﻿''''''*** ////  DISM GUI TOOL by Amit Haridas \\\\\ *** ''''''
+' Functions list
+' dismcommands() --- Function assigns whether the serviced image is offline or online
+' OsBit() --- Assigns the OS enviornmet and correct WAIK path (amd64 or x86)
+
+Imports System
+Imports System.Diagnostics
 Imports System.IO
+Imports System.ComponentModel
+Imports System.Threading
 Imports System.Console
 Imports Microsoft.Win32.Registry
 Imports System.Environment
-Imports System
 Imports System.Management
 Imports System.Collections
 Imports Microsoft.VisualBasic.FileIO.FileSystem
@@ -18,6 +25,7 @@ Public Class DismUtility
     Dim pro, helppro As New Process
     Dim selfiledlg, ofdlg1 As New OpenFileDialog
     Dim mtfolder As New FolderBrowserDialog
+    Dim tworker As BackgroundWorker
 
 
     Public Function dismcommands()
@@ -68,12 +76,10 @@ Public Class DismUtility
             End If
         End If
 
-
         dismpath = libpath & "Dism\Dism.exe"
         imagexpath = libpath & "Dism\imagex.exe"
         bcdpath = libpath & "BCDboot\"
         oscdpath = libpath & "Oscdimg\"
-
 
         Dim di = FileVersionInfo.GetVersionInfo(dismpath)
         dinfo = di.ToString
@@ -100,7 +106,7 @@ Public Class DismUtility
         End If
     End Function
 
-    Public Function Packages()
+    Public Function Get_Packages()
         dismcommands()
         OsBit()
         Dim A, B, C, D
@@ -153,12 +159,6 @@ Public Class DismUtility
     Private Sub Timer1_Tick(sender As Object, e As EventArgs) Handles Timer1.Tick
         ToolStripStatusLabel1.Text = Now.ToLongDateString & ", "
         ToolStripStatusLabel2.Text = Now.ToLongTimeString & " " & System.TimeZoneInfo.Local.DisplayName
-    End Sub
-
-    Private Sub Button1_Click(sender As Object, e As EventArgs)
-        OsBit()
-        MsgBox(libpath & vbNewLine & Sysinfo)
-
     End Sub
 
     Private Sub ab4_Click(sender As Object, e As EventArgs) Handles ab4.Click
@@ -430,7 +430,7 @@ Public Class DismUtility
     End Sub
 
     Private Sub pkgworker1_DoWork(sender As Object, e As ComponentModel.DoWorkEventArgs) Handles pkgworker1.DoWork
-        Packages()
+        Get_Packages()
     End Sub
 
     Private Sub Ab1_Click(sender As Object, e As EventArgs) Handles Ab1.Click
@@ -483,6 +483,48 @@ Public Class DismUtility
         dt2.Text = pkgpath
         tb1.AppendText(Environment.NewLine + Environment.NewLine)
         tb1.AppendText("The Driver folder selected is " & dt2.Text & vbNewLine)
+        tworker = New BackgroundWorker()
+        tb1.AppendText(vbNewLine)
+        With p
+            .UseShellExecute = False
+            .Arguments = "/Mount-Image /ImageFile:" & filename & " /Index:" & ct & " /MountDir:" & mtpath
+            .CreateNoWindow = True
+            .RedirectStandardOutput = True
+            .RedirectStandardError = True
+        End With
+        Dim pro As New Process
+        pro.StartInfo = p
+        pro.Start()
+
+        Dim SROutput As System.IO.StreamReader = pro.StandardOutput
+        Dim tmp As String
+        Do While pro.HasExited = False
+            tmp = SROutput.ReadLine
+            If tmp <> "" Then
+                Me.tb1.AppendText(tmp & vbNewLine)
+                Application.DoEvents()
+            End If
+            Application.DoEvents()
+        Loop
+        tb1.ScrollToCaret()
+        pro.Close()
+
+
+    End Sub
+
+    Private Sub bb4_Click(sender As Object, e As EventArgs) Handles bb4.Click
+        With ofdlg1
+            .Filter = "Windows Update Installer|*.msu|cab files|*.cab"
+            .Title = "Select *.msu or *.cab file"
+        End With
+        ofdlg1.ShowDialog()
+        at1.Text = ofdlg1.FileName.ToString()
+        tb1.AppendText(vbNewLine)
+        tb1.AppendText("The Following file has been selected " & at1.Text)
+        pt2.Text = at1.Text
+        tb1.AppendText(vbNewLine)
+        tb1.ScrollToCaret()
+
     End Sub
 
     Private Sub ab5_Click(sender As Object, e As EventArgs) Handles ab5.Click
@@ -657,10 +699,8 @@ Public Class DismUtility
     End Sub
 
     Private Sub DrvWorker1_DoWork(sender As Object, e As ComponentModel.DoWorkEventArgs) Handles DrvWorker1.DoWork
-
         dismcommands()
         OsBit()
-
         With p
             .UseShellExecute = False
             .FileName = dismpath
@@ -703,7 +743,7 @@ Public Class DismUtility
         With p
             .UseShellExecute = False
             .FileName = dismpath
-            .Arguments = imageloc & " /Export-Driver /Destination:" & path
+            .Arguments = imageloc & "/Export-Driver /Destination:" & path
             .CreateNoWindow = True
             .RedirectStandardOutput = True
             .RedirectStandardError = True
@@ -711,18 +751,26 @@ Public Class DismUtility
         Dim pro As New Process
         pro.StartInfo = p
         pro.Start()
+        tb1.AppendText("Exporting selected Drivers, Please wait for the program to finish")
+        tb1.AppendText(vbNewLine)
         Dim SROutput As System.IO.StreamReader = pro.StandardOutput
-        Dim tmp As String
-        Do While pro.HasExited = False
-            tmp = SROutput.ReadLine
-            If tmp <> "" Then
-                Me.tb1.AppendText(tmp & vbNewLine)
-                Application.DoEvents()
-            End If
-            Application.DoEvents()
-            tb1.ScrollToCaret()
-        Loop
+        Dim ts As String = SROutput.ReadToEnd()
+        tb1.AppendText(ts)
+        tb1.ScrollToCaret()
+        pro.WaitForExit()
         pro.Close()
+        'Dim SROutput As System.IO.StreamReader = pro.StandardOutput
+        'Dim tmp As String
+        'Do While pro.HasExited = False
+        '    tmp = SROutput.ReadLine
+        '    If tmp <> "" Then
+        '        Me.tb1.AppendText(tmp & vbNewLine)
+        '        Application.DoEvents()
+        '    End If
+        '    Application.DoEvents()
+        '    tb1.ScrollToCaret()
+        'Loop
+        'pro.Close()
     End Sub
 
     Private Sub db3_Click(sender As Object, e As EventArgs)
