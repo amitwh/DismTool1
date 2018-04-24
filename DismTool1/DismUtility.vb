@@ -7,24 +7,16 @@ Imports System
 Imports System.Management
 Imports System.Collections
 Imports Microsoft.VisualBasic.FileIO.FileSystem
+Imports Microsoft.VisualBasic.Devices
 
 Public Class DismUtility
     Dim apppath As String = IO.Directory.GetParent(Application.ExecutablePath).FullName
     Dim a As String = System.Environment.MachineName.ToString
-    Dim b As String = System.Environment.OSVersion.GetType.GetProperties.ToString
-    Dim libpath, dismpath, imagexpath, bcdpath, oscdpath As String
-    Dim Sysinfo As String
-    Dim disminfo, dinfo As String
-    Dim OS1 As String
-    Dim p As New ProcessStartInfo
-    Dim pro As New Process
-    Dim helppro As New Process
-    Dim dsmhlp As New ProcessStartInfo
-    Dim Packagecmd As String
-    Dim dsmargs As String
-    Dim selfiledlg As New OpenFileDialog
-    Dim imageloc As String
-    Dim ofdlg1 As New OpenFileDialog
+    Dim b As String = My.Computer.Info.OSFullName.ToString
+    Dim libpath, dismpath, imagexpath, bcdpath, oscdpath, Sysinfo, disminfo, dinfo, OS1, packagecmd, dsmargs, imageloc As String
+    Dim p, dsmhlp As New ProcessStartInfo
+    Dim pro, helppro As New Process
+    Dim selfiledlg, ofdlg1 As New OpenFileDialog
     Dim mtfolder As New FolderBrowserDialog
 
 
@@ -477,6 +469,22 @@ Public Class DismUtility
         '  pro.Dispose()
     End Sub
 
+    Private Sub Label2_Click(sender As Object, e As EventArgs) Handles Label2.Click
+
+    End Sub
+
+    Private Sub db4_Click(sender As Object, e As EventArgs) Handles db4.Click
+        With mtfolder
+            .ShowNewFolderButton = False
+            .Description = "Select Folder where Drivers are stored"
+            .ShowDialog()
+        End With
+        Dim pkgpath As String = mtfolder.SelectedPath
+        dt2.Text = pkgpath
+        tb1.AppendText(Environment.NewLine + Environment.NewLine)
+        tb1.AppendText("The Driver folder selected is " & dt2.Text & vbNewLine)
+    End Sub
+
     Private Sub ab5_Click(sender As Object, e As EventArgs) Handles ab5.Click
         Dim filename = at1.Text
         Dim mtpath = at2.Text
@@ -717,16 +725,8 @@ Public Class DismUtility
         pro.Close()
     End Sub
 
-    Private Sub db3_Click(sender As Object, e As EventArgs) Handles db3.Click
-        With mtfolder
-            .ShowNewFolderButton = False
-            .Description = "Select Folder where Drivers are stored"
-            .ShowDialog()
-        End With
-        Dim pkgpath As String = mtfolder.SelectedPath
-        dt2.Text = pkgpath
-        tb1.AppendText(Environment.NewLine + Environment.NewLine)
-        tb1.AppendText("The Driver folder selected is " & dt2.Text & vbNewLine)
+    Private Sub db3_Click(sender As Object, e As EventArgs)
+
     End Sub
 
     Private Sub CheckBox1_CheckedChanged(sender As Object, e As EventArgs) Handles CheckBox1.CheckedChanged
