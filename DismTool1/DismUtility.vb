@@ -44,7 +44,6 @@ Public Class DismUtility
         Dim imgpath As String = at1.Text
         Dim imgindex As String = numupdn1.Value
         Dim pkddir As String = PT1.Text
-        Dim sglpkg As String = pt2.Text
         Dim rmpkg As String = pt3.Text
         Return imageloc
     End Function
@@ -109,10 +108,12 @@ Public Class DismUtility
     Public Function Get_Packages()
         dismcommands()
         OsBit()
+        Dim abc As Array
         Dim A, B, C, D
         With p
             .UseShellExecute = False
             .FileName = dismpath
+            'Arguments = imageloc & " /loglevel:2 /Get-packages"
             .Arguments = imageloc & " /loglevel:2 /Get-packages /Format:table"
             .CreateNoWindow = True
             .RedirectStandardOutput = True
@@ -125,9 +126,10 @@ Public Class DismUtility
             Dim sLine As String = pro.StandardOutput.ReadLine
             If (Not String.IsNullOrEmpty(sLine)) Then
             End If
+            ComboBox1.Items.Add(sLine)
             tb1.AppendText(sLine & vbNewLine)
             tb1.ScrollToCaret()
-            ' ListBox1.Items.AddRange(Split(sLine, "|", -1, StringSplitOptions.RemoveEmptyEntries))
+            'ListBox1.Items.AddRange(Split(sLine, "|", -1, StringSplitOptions.RemoveEmptyEntries))
             Application.DoEvents()
         End While
         ' ListBox1.Items.AddRange(Split(pro.StandardOutput.ReadToEnd, vbCrLf))
@@ -411,7 +413,7 @@ Public Class DismUtility
     End Sub
 
 
-    Private Sub bb2_Click(sender As Object, e As EventArgs) Handles bb2.Click
+    Private Sub bb2_Click(sender As Object, e As EventArgs)
 
     End Sub
 
@@ -473,11 +475,12 @@ Public Class DismUtility
         dt2.Text = pkgpath
         tb1.AppendText(Environment.NewLine + Environment.NewLine)
         tb1.AppendText("The Driver folder selected is " & dt2.Text & vbNewLine)
-        tworker = New BackgroundWorker()
+
         tb1.AppendText(vbNewLine)
         With p
             .UseShellExecute = False
-            .Arguments = "/Mount-Image /ImageFile:" & filename & " /Index:" & ct & " /MountDir:" & mtpath
+
+            '.Arguments = "/Mount-Image /ImageFile:" & filename & " /Index:" & ct & " /MountDir:" & mtpath
             .CreateNoWindow = True
             .RedirectStandardOutput = True
             .RedirectStandardError = True
@@ -503,18 +506,22 @@ Public Class DismUtility
     End Sub
 
     Private Sub bb4_Click(sender As Object, e As EventArgs) Handles bb4.Click
-        With ofdlg1
-            .Filter = "Windows Update Installer|*.msu|cab files|*.cab"
-            .Title = "Select *.msu or *.cab file"
-        End With
-        ofdlg1.ShowDialog()
-        at1.Text = ofdlg1.FileName.ToString()
-        tb1.AppendText(vbNewLine)
-        tb1.AppendText("The Following file has been selected " & at1.Text)
-        pt2.Text = at1.Text
-        tb1.AppendText(vbNewLine)
-        tb1.ScrollToCaret()
-
+        If pkgworker2.IsBusy = True Then
+            MsgBox("The program is processing your previous request, please try later", MsgBoxStyle.Critical)
+            Exit Sub
+        Else
+            With ofdlg1
+                .Filter = "Windows Update Installer|*.msu|cab files|*.cab"
+                .Title = "Select *.msu or *.cab file"
+            End With
+            ofdlg1.ShowDialog()
+            PT1.Text = ofdlg1.FileName.ToString()
+            tb1.AppendText(vbNewLine)
+            tb1.AppendText("The Following file has been selected " & PT1.Text)
+            tb1.AppendText(vbNewLine)
+            tb1.ScrollToCaret()
+            pkgworker2.RunWorkerAsync()
+        End If
     End Sub
 
     Private Sub ab5_Click(sender As Object, e As EventArgs) Handles ab5.Click
@@ -610,8 +617,6 @@ Public Class DismUtility
     End Sub
 
     Private Sub bb3_Click(sender As Object, e As EventArgs) Handles bb3.Click
-
-
         If pkgworker2.IsBusy = True Then
             MsgBox("The program is processing your previous request, please try later", MsgBoxStyle.Critical)
             Exit Sub

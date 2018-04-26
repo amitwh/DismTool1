@@ -23,6 +23,7 @@ Partial Class DismUtility
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(DismUtility))
         Me.MenuStrip1 = New System.Windows.Forms.MenuStrip()
         Me.ToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
         Me.OpenDismLogToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
@@ -58,6 +59,7 @@ Partial Class DismUtility
         Me.at1 = New System.Windows.Forms.TextBox()
         Me.TabPage2 = New System.Windows.Forms.TabPage()
         Me.GB1 = New System.Windows.Forms.GroupBox()
+        Me.Label9 = New System.Windows.Forms.Label()
         Me.bb5 = New System.Windows.Forms.Button()
         Me.pt3 = New System.Windows.Forms.TextBox()
         Me.Label7 = New System.Windows.Forms.Label()
@@ -65,7 +67,6 @@ Partial Class DismUtility
         Me.bb4 = New System.Windows.Forms.Button()
         Me.bb3 = New System.Windows.Forms.Button()
         Me.bb1 = New System.Windows.Forms.Button()
-        Me.bb2 = New System.Windows.Forms.Button()
         Me.PT1 = New System.Windows.Forms.TextBox()
         Me.TabPage3 = New System.Windows.Forms.TabPage()
         Me.gb3 = New System.Windows.Forms.GroupBox()
@@ -99,6 +100,7 @@ Partial Class DismUtility
         Me.pkgworker2 = New System.ComponentModel.BackgroundWorker()
         Me.DrvWorker1 = New System.ComponentModel.BackgroundWorker()
         Me.DrvWorker2 = New System.ComponentModel.BackgroundWorker()
+        Me.ComboBox1 = New System.Windows.Forms.ComboBox()
         Me.MenuStrip1.SuspendLayout()
         Me.StatusStrip1.SuspendLayout()
         Me.GroupBox5.SuspendLayout()
@@ -410,6 +412,8 @@ Partial Class DismUtility
         '
         Me.GB1.AutoSize = True
         Me.GB1.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.GB1.Controls.Add(Me.ComboBox1)
+        Me.GB1.Controls.Add(Me.Label9)
         Me.GB1.Controls.Add(Me.bb5)
         Me.GB1.Controls.Add(Me.pt3)
         Me.GB1.Controls.Add(Me.Label7)
@@ -417,7 +421,6 @@ Partial Class DismUtility
         Me.GB1.Controls.Add(Me.bb4)
         Me.GB1.Controls.Add(Me.bb3)
         Me.GB1.Controls.Add(Me.bb1)
-        Me.GB1.Controls.Add(Me.bb2)
         Me.GB1.Controls.Add(Me.PT1)
         Me.GB1.Dock = System.Windows.Forms.DockStyle.Fill
         Me.GB1.Location = New System.Drawing.Point(3, 3)
@@ -427,9 +430,18 @@ Partial Class DismUtility
         Me.GB1.TabStop = False
         Me.GB1.Text = "Packages Changes"
         '
+        'Label9
+        '
+        Me.Label9.AutoSize = True
+        Me.Label9.Location = New System.Drawing.Point(522, 96)
+        Me.Label9.Name = "Label9"
+        Me.Label9.Size = New System.Drawing.Size(17, 13)
+        Me.Label9.TabIndex = 24
+        Me.Label9.Text = "or"
+        '
         'bb5
         '
-        Me.bb5.Location = New System.Drawing.Point(549, 210)
+        Me.bb5.Location = New System.Drawing.Point(549, 159)
         Me.bb5.Name = "bb5"
         Me.bb5.Size = New System.Drawing.Size(127, 23)
         Me.bb5.TabIndex = 23
@@ -438,16 +450,17 @@ Partial Class DismUtility
         '
         'pt3
         '
-        Me.pt3.Location = New System.Drawing.Point(179, 183)
+        Me.pt3.Location = New System.Drawing.Point(179, 132)
         Me.pt3.Name = "pt3"
         Me.pt3.Size = New System.Drawing.Size(497, 21)
         Me.pt3.TabIndex = 22
+        Me.ToolTip1.SetToolTip(Me.pt3, resources.GetString("pt3.ToolTip"))
         '
         'Label7
         '
         Me.Label7.AutoSize = True
         Me.Label7.Font = New System.Drawing.Font("Verdana", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label7.Location = New System.Drawing.Point(25, 191)
+        Me.Label7.Location = New System.Drawing.Point(25, 140)
         Me.Label7.Name = "Label7"
         Me.Label7.Size = New System.Drawing.Size(118, 13)
         Me.Label7.TabIndex = 21
@@ -465,7 +478,7 @@ Partial Class DismUtility
         '
         'bb4
         '
-        Me.bb4.Location = New System.Drawing.Point(549, 86)
+        Me.bb4.Location = New System.Drawing.Point(383, 86)
         Me.bb4.Name = "bb4"
         Me.bb4.Size = New System.Drawing.Size(127, 23)
         Me.bb4.TabIndex = 16
@@ -474,7 +487,7 @@ Partial Class DismUtility
         '
         'bb3
         '
-        Me.bb3.Location = New System.Drawing.Point(549, 118)
+        Me.bb3.Location = New System.Drawing.Point(549, 86)
         Me.bb3.Name = "bb3"
         Me.bb3.Size = New System.Drawing.Size(127, 23)
         Me.bb3.TabIndex = 17
@@ -490,15 +503,6 @@ Partial Class DismUtility
         Me.bb1.Text = "Get Installed packages"
         Me.ToolTip1.SetToolTip(Me.bb1, "Get List of installed packages added or installed")
         Me.bb1.UseVisualStyleBackColor = True
-        '
-        'bb2
-        '
-        Me.bb2.Location = New System.Drawing.Point(384, 118)
-        Me.bb2.Name = "bb2"
-        Me.bb2.Size = New System.Drawing.Size(149, 23)
-        Me.bb2.TabIndex = 19
-        Me.bb2.Text = "Select Package Directory"
-        Me.bb2.UseVisualStyleBackColor = True
         '
         'PT1
         '
@@ -812,6 +816,14 @@ Partial Class DismUtility
         Me.DrvWorker2.WorkerReportsProgress = True
         Me.DrvWorker2.WorkerSupportsCancellation = True
         '
+        'ComboBox1
+        '
+        Me.ComboBox1.FormattingEnabled = True
+        Me.ComboBox1.Location = New System.Drawing.Point(28, 220)
+        Me.ComboBox1.Name = "ComboBox1"
+        Me.ComboBox1.Size = New System.Drawing.Size(648, 21)
+        Me.ComboBox1.TabIndex = 25
+        '
         'DismUtility
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -905,7 +917,6 @@ Partial Class DismUtility
     Friend WithEvents bb4 As Button
     Friend WithEvents bb3 As Button
     Friend WithEvents bb1 As Button
-    Friend WithEvents bb2 As Button
     Friend WithEvents PT1 As TextBox
     Friend WithEvents tb1 As System.Windows.Forms.RichTextBox
     Friend WithEvents SaveOutputToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
@@ -933,4 +944,6 @@ Partial Class DismUtility
     Friend WithEvents TabPage2 As TabPage
     Friend WithEvents Label8 As Label
     Friend WithEvents Panel2 As Panel
+    Friend WithEvents Label9 As Label
+    Friend WithEvents ComboBox1 As ComboBox
 End Class
