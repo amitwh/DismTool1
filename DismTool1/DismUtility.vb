@@ -412,17 +412,7 @@ Public Class DismUtility
 
 
     Private Sub bb2_Click(sender As Object, e As EventArgs) Handles bb2.Click
-        With mtfolder
-            .ShowNewFolderButton = False
-            .Description = "Select Folder where packages are stored"
-            .ShowDialog()
-        End With
 
-        Dim pkgpath As String = mtfolder.SelectedPath
-        PT1.Text = pkgpath
-        tb1.AppendText(Environment.NewLine + Environment.NewLine)
-        tb1.AppendText("The folder selected for mounting file is  " & PT1.Text & vbNewLine)
-        tb1.ScrollToCaret()
     End Sub
 
     Private Sub SaveOutputToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles SaveOutputToolStripMenuItem.Click
@@ -620,10 +610,22 @@ Public Class DismUtility
     End Sub
 
     Private Sub bb3_Click(sender As Object, e As EventArgs) Handles bb3.Click
+
+
         If pkgworker2.IsBusy = True Then
             MsgBox("The program is processing your previous request, please try later", MsgBoxStyle.Critical)
             Exit Sub
         Else
+            With mtfolder
+                .ShowNewFolderButton = False
+                .Description = "Select Folder where packages are stored"
+                .ShowDialog()
+            End With
+            Dim pkgpath As String = mtfolder.SelectedPath
+            PT1.Text = pkgpath
+            tb1.AppendText(Environment.NewLine + Environment.NewLine)
+            tb1.AppendText("The folder selected for mounting file is  " & PT1.Text & vbNewLine)
+            tb1.ScrollToCaret()
             pkgworker2.RunWorkerAsync()
         End If
 

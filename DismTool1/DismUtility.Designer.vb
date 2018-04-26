@@ -66,7 +66,6 @@ Partial Class DismUtility
         Me.bb3 = New System.Windows.Forms.Button()
         Me.bb1 = New System.Windows.Forms.Button()
         Me.bb2 = New System.Windows.Forms.Button()
-        Me.pt2 = New System.Windows.Forms.TextBox()
         Me.PT1 = New System.Windows.Forms.TextBox()
         Me.TabPage3 = New System.Windows.Forms.TabPage()
         Me.gb3 = New System.Windows.Forms.GroupBox()
@@ -419,7 +418,6 @@ Partial Class DismUtility
         Me.GB1.Controls.Add(Me.bb3)
         Me.GB1.Controls.Add(Me.bb1)
         Me.GB1.Controls.Add(Me.bb2)
-        Me.GB1.Controls.Add(Me.pt2)
         Me.GB1.Controls.Add(Me.PT1)
         Me.GB1.Dock = System.Windows.Forms.DockStyle.Fill
         Me.GB1.Location = New System.Drawing.Point(3, 3)
@@ -467,7 +465,7 @@ Partial Class DismUtility
         '
         'bb4
         '
-        Me.bb4.Location = New System.Drawing.Point(549, 148)
+        Me.bb4.Location = New System.Drawing.Point(549, 86)
         Me.bb4.Name = "bb4"
         Me.bb4.Size = New System.Drawing.Size(127, 23)
         Me.bb4.TabIndex = 16
@@ -476,7 +474,7 @@ Partial Class DismUtility
         '
         'bb3
         '
-        Me.bb3.Location = New System.Drawing.Point(549, 86)
+        Me.bb3.Location = New System.Drawing.Point(549, 118)
         Me.bb3.Name = "bb3"
         Me.bb3.Size = New System.Drawing.Size(127, 23)
         Me.bb3.TabIndex = 17
@@ -495,19 +493,12 @@ Partial Class DismUtility
         '
         'bb2
         '
-        Me.bb2.Location = New System.Drawing.Point(394, 86)
+        Me.bb2.Location = New System.Drawing.Point(384, 118)
         Me.bb2.Name = "bb2"
         Me.bb2.Size = New System.Drawing.Size(149, 23)
         Me.bb2.TabIndex = 19
         Me.bb2.Text = "Select Package Directory"
         Me.bb2.UseVisualStyleBackColor = True
-        '
-        'pt2
-        '
-        Me.pt2.Location = New System.Drawing.Point(179, 121)
-        Me.pt2.Name = "pt2"
-        Me.pt2.Size = New System.Drawing.Size(497, 21)
-        Me.pt2.TabIndex = 14
         '
         'PT1
         '
@@ -915,7 +906,6 @@ Partial Class DismUtility
     Friend WithEvents bb3 As Button
     Friend WithEvents bb1 As Button
     Friend WithEvents bb2 As Button
-    Friend WithEvents pt2 As TextBox
     Friend WithEvents PT1 As TextBox
     Friend WithEvents tb1 As System.Windows.Forms.RichTextBox
     Friend WithEvents SaveOutputToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
