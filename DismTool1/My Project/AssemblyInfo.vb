@@ -8,12 +8,12 @@ Imports System.Runtime.InteropServices
 
 ' Review the values of the assembly attributes
 
-<Assembly: AssemblyTitle("DismTool")> 
-<Assembly: AssemblyDescription("Tool for Offline / Online windows servicing")> 
-<Assembly: AssemblyCompany("Amit Haridas")> 
-<Assembly: AssemblyProduct("DismTool")> 
-<Assembly: AssemblyCopyright("Copyright ©  2016")> 
-<Assembly: AssemblyTrademark("Amit haridas")> 
+<Assembly: AssemblyTitle("DismGUITool")>
+<Assembly: AssemblyDescription("GUI Tool for Offline / Online windows servicing")>
+<Assembly: AssemblyCompany("Amit Haridas")>
+<Assembly: AssemblyProduct("DismGUITool")>
+<Assembly: AssemblyCopyright("Copyright ©  2018")>
+<Assembly: AssemblyTrademark("Amit Haridas")>
 
 <Assembly: ComVisible(False)>
 

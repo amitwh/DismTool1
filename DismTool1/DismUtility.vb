@@ -28,6 +28,12 @@ Public Class DismUtility
     Dim tworker As BackgroundWorker
 
 
+    Public Function add_driver()
+        dismcommands()
+        OsBit()
+
+    End Function
+
     Public Function dismcommands()
         Dim mtpath As String = at2.Text
         ' *********** Imageloc variable returns whether the processing has to happen on online installation or offline image ***********'
@@ -466,6 +472,29 @@ Public Class DismUtility
     End Sub
 
     Private Sub db4_Click(sender As Object, e As EventArgs) Handles db4.Click
+        'Dism / Image: C : \test\offline /Add-Driver /driver:C : \test\drivers\
+        'Dism / Image: C : \test\offline /Add-Driver /driver:C : \test\drivers /recurse
+        'Dism / Image: C : \test\offline /Add-Driver /driver:C : \test\drivers\mydriver.inf
+        'Dism / Image: C : \test\offline /Add-Driver /driver:C : \test\drivers\mydriver.inf /ForceUnsigned
+        If DrvWorker2.IsBusy = True Then
+            MsgBox("The program is processing your previous request, please try later", MsgBoxStyle.Critical)
+            Exit Sub
+        Else
+            With mtfolder
+                .ShowNewFolderButton = False
+                .Description = "Select Folder where Drivers are stored"
+                .ShowDialog()
+            End With
+            Dim drvpath As String = mtfolder.SelectedPath
+            dt2.Text = drvpath
+            tb1.AppendText(Environment.NewLine + Environment.NewLine)
+            tb1.AppendText("The Driver folder selected is " & dt2.Text & vbNewLine)
+            tb1.AppendText(vbNewLine)
+            tb1.ScrollToCaret()
+            DrvWorker2.RunWorkerAsync()
+        End If
+
+
         With mtfolder
             .ShowNewFolderButton = False
             .Description = "Select Folder where Drivers are stored"
@@ -522,6 +551,91 @@ Public Class DismUtility
             tb1.ScrollToCaret()
             pkgworker2.RunWorkerAsync()
         End If
+    End Sub
+
+    Private Sub db5_Click(sender As Object, e As EventArgs) Handles db5.Click
+        If DrvWorker2.IsBusy = True Then
+            MsgBox("The program is processing your previous request, please try later", MsgBoxStyle.Critical)
+            Exit Sub
+        Else
+            With ofdlg1
+                .Filter = "Windows Driver Setup Files|*.inf"
+                .Title = "Select *.inf file"
+            End With
+            ofdlg1.ShowDialog()
+            PT1.Text = ofdlg1.FileName.ToString()
+            tb1.AppendText(vbNewLine)
+            tb1.AppendText("The Following file has been selected " & dt2.Text)
+            tb1.AppendText(vbNewLine)
+            tb1.ScrollToCaret()
+            DrvWorker2.RunWorkerAsync()
+        End If
+    End Sub
+
+    Private Sub DrvWorker2_DoWork(sender As Object, e As DoWorkEventArgs) Handles DrvWorker2.DoWork
+        'Dism / Image: C : \test\offline /Add-Driver /driver:C : \test\drivers\
+        'Dism / Image: C : \test\offline /Add-Driver /driver:C : \test\drivers /recurse
+        'Dism / Image: C : \test\offline /Add-Driver /driver:C : \test\drivers\mydriver.inf
+        'Dism / Image: C : \test\offline /Add-Driver /driver:C : \test\drivers\mydriver.inf /ForceUnsigned
+        dismcommands()
+        OsBit()
+        Dim filepath = dt2.Text
+        With p
+            .UseShellExecute = False
+            .FileName = dismpath
+            If cb1.Checked = False And cb2.Checked = False Then
+                .Arguments = imageloc & "/Add-Driver /Driver:" & filepath
+            ElseIf cb1.Checked = True And cb2.Checked = False Then
+                .Arguments = imageloc & "/Add-Driver /Driver:" & filepath & " /recurse"
+            ElseIf cb1.Checked = True And cb2.Checked = True Then
+                .Arguments = imageloc & "/Add-Driver /Driver:" & filepath & " /recurse /ForceUnsigned"
+            ElseIf cb1.Checked = False And cb2.Checked = True Then
+                .Arguments = imageloc & "/Add-Driver /Driver:" & filepath & " /ForceUnsigned"
+            Else
+                MsgBox("I am confused")
+                Exit Sub
+            End If
+            .CreateNoWindow = True
+            .RedirectStandardOutput = True
+            .RedirectStandardError = True
+        End With
+        pro.StartInfo = p
+        pro.Start()
+        While (pro.HasExited = False)
+            Dim sLine As String = pro.StandardOutput.ReadLine
+            If (Not String.IsNullOrEmpty(sLine)) Then
+            End If
+            tb1.AppendText(sLine & vbNewLine)
+            tb1.ScrollToCaret()
+            Application.DoEvents()
+        End While
+        pro.Close()
+    End Sub
+
+    Private Sub db6_Click(sender As Object, e As EventArgs) Handles db6.Click
+        ' Dism /image:C:\test\offline /Remove-Driver /driver:oem1.inf
+        dismcommands()
+        OsBit()
+        Dim filepath = dt4.Text
+        With p
+            .UseShellExecute = False
+            .FileName = dismpath
+            .Arguments = imageloc & " /Remove-Driver /driver:" & filepath
+            .CreateNoWindow = True
+            .RedirectStandardOutput = True
+            .RedirectStandardError = True
+        End With
+        pro.StartInfo = p
+        pro.Start()
+        While (pro.HasExited = False)
+            Dim sLine As String = pro.StandardOutput.ReadLine
+            If (Not String.IsNullOrEmpty(sLine)) Then
+            End If
+            tb1.AppendText(sLine & vbNewLine)
+            tb1.ScrollToCaret()
+            Application.DoEvents()
+        End While
+        pro.Close()
     End Sub
 
     Private Sub ab5_Click(sender As Object, e As EventArgs) Handles ab5.Click
@@ -784,7 +898,7 @@ Public Class DismUtility
 
     End Sub
 
-    Private Sub CheckBox1_CheckedChanged(sender As Object, e As EventArgs) Handles CheckBox1.CheckedChanged
+    Private Sub CheckBox1_CheckedChanged(sender As Object, e As EventArgs) Handles cb1.CheckedChanged
 
     End Sub
 

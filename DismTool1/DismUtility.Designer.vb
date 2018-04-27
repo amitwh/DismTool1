@@ -59,6 +59,7 @@ Partial Class DismUtility
         Me.at1 = New System.Windows.Forms.TextBox()
         Me.TabPage2 = New System.Windows.Forms.TabPage()
         Me.GB1 = New System.Windows.Forms.GroupBox()
+        Me.ComboBox1 = New System.Windows.Forms.ComboBox()
         Me.Label9 = New System.Windows.Forms.Label()
         Me.bb5 = New System.Windows.Forms.Button()
         Me.pt3 = New System.Windows.Forms.TextBox()
@@ -70,8 +71,8 @@ Partial Class DismUtility
         Me.PT1 = New System.Windows.Forms.TextBox()
         Me.TabPage3 = New System.Windows.Forms.TabPage()
         Me.gb3 = New System.Windows.Forms.GroupBox()
-        Me.CheckBox2 = New System.Windows.Forms.CheckBox()
-        Me.CheckBox1 = New System.Windows.Forms.CheckBox()
+        Me.cb2 = New System.Windows.Forms.CheckBox()
+        Me.cb1 = New System.Windows.Forms.CheckBox()
         Me.db4 = New System.Windows.Forms.Button()
         Me.db2 = New System.Windows.Forms.Button()
         Me.Panel2 = New System.Windows.Forms.Panel()
@@ -100,7 +101,6 @@ Partial Class DismUtility
         Me.pkgworker2 = New System.ComponentModel.BackgroundWorker()
         Me.DrvWorker1 = New System.ComponentModel.BackgroundWorker()
         Me.DrvWorker2 = New System.ComponentModel.BackgroundWorker()
-        Me.ComboBox1 = New System.Windows.Forms.ComboBox()
         Me.MenuStrip1.SuspendLayout()
         Me.StatusStrip1.SuspendLayout()
         Me.GroupBox5.SuspendLayout()
@@ -430,6 +430,15 @@ Partial Class DismUtility
         Me.GB1.TabStop = False
         Me.GB1.Text = "Packages Changes"
         '
+        'ComboBox1
+        '
+        Me.ComboBox1.FormattingEnabled = True
+        Me.ComboBox1.Location = New System.Drawing.Point(28, 220)
+        Me.ComboBox1.Name = "ComboBox1"
+        Me.ComboBox1.Size = New System.Drawing.Size(648, 21)
+        Me.ComboBox1.Sorted = True
+        Me.ComboBox1.TabIndex = 25
+        '
         'Label9
         '
         Me.Label9.AutoSize = True
@@ -525,8 +534,8 @@ Partial Class DismUtility
         '
         Me.gb3.AutoSize = True
         Me.gb3.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.gb3.Controls.Add(Me.CheckBox2)
-        Me.gb3.Controls.Add(Me.CheckBox1)
+        Me.gb3.Controls.Add(Me.cb2)
+        Me.gb3.Controls.Add(Me.cb1)
         Me.gb3.Controls.Add(Me.db4)
         Me.gb3.Controls.Add(Me.db2)
         Me.gb3.Controls.Add(Me.Panel2)
@@ -548,25 +557,25 @@ Partial Class DismUtility
         Me.gb3.TabStop = False
         Me.gb3.Text = "Drivers"
         '
-        'CheckBox2
+        'cb2
         '
-        Me.CheckBox2.AutoSize = True
-        Me.CheckBox2.Location = New System.Drawing.Point(333, 157)
-        Me.CheckBox2.Name = "CheckBox2"
-        Me.CheckBox2.Size = New System.Drawing.Size(71, 17)
-        Me.CheckBox2.TabIndex = 57
-        Me.CheckBox2.Text = "UnSigned"
-        Me.CheckBox2.UseVisualStyleBackColor = True
+        Me.cb2.AutoSize = True
+        Me.cb2.Location = New System.Drawing.Point(333, 157)
+        Me.cb2.Name = "cb2"
+        Me.cb2.Size = New System.Drawing.Size(71, 17)
+        Me.cb2.TabIndex = 57
+        Me.cb2.Text = "UnSigned"
+        Me.cb2.UseVisualStyleBackColor = True
         '
-        'CheckBox1
+        'cb1
         '
-        Me.CheckBox1.AutoSize = True
-        Me.CheckBox1.Location = New System.Drawing.Point(235, 157)
-        Me.CheckBox1.Name = "CheckBox1"
-        Me.CheckBox1.Size = New System.Drawing.Size(73, 17)
-        Me.CheckBox1.TabIndex = 57
-        Me.CheckBox1.Text = "Recursive"
-        Me.CheckBox1.UseVisualStyleBackColor = True
+        Me.cb1.AutoSize = True
+        Me.cb1.Location = New System.Drawing.Point(235, 157)
+        Me.cb1.Name = "cb1"
+        Me.cb1.Size = New System.Drawing.Size(73, 17)
+        Me.cb1.TabIndex = 57
+        Me.cb1.Text = "Recursive"
+        Me.cb1.UseVisualStyleBackColor = True
         '
         'db4
         '
@@ -784,10 +793,13 @@ Partial Class DismUtility
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.tb1.AutoWordSelection = True
         Me.tb1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.tb1.Cursor = System.Windows.Forms.Cursors.Default
+        Me.tb1.EnableAutoDragDrop = True
         Me.tb1.Font = New System.Drawing.Font("Courier New", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.tb1.Location = New System.Drawing.Point(12, 394)
         Me.tb1.Name = "tb1"
         Me.tb1.ReadOnly = True
+        Me.tb1.ShowSelectionMargin = True
         Me.tb1.Size = New System.Drawing.Size(713, 142)
         Me.tb1.TabIndex = 12
         Me.tb1.Text = ""
@@ -815,14 +827,6 @@ Partial Class DismUtility
         '
         Me.DrvWorker2.WorkerReportsProgress = True
         Me.DrvWorker2.WorkerSupportsCancellation = True
-        '
-        'ComboBox1
-        '
-        Me.ComboBox1.FormattingEnabled = True
-        Me.ComboBox1.Location = New System.Drawing.Point(28, 220)
-        Me.ComboBox1.Name = "ComboBox1"
-        Me.ComboBox1.Size = New System.Drawing.Size(648, 21)
-        Me.ComboBox1.TabIndex = 25
         '
         'DismUtility
         '
@@ -926,8 +930,8 @@ Partial Class DismUtility
     Friend WithEvents DrvWorker1 As System.ComponentModel.BackgroundWorker
     Friend WithEvents DrvWorker2 As System.ComponentModel.BackgroundWorker
     Friend WithEvents gb3 As GroupBox
-    Friend WithEvents CheckBox2 As CheckBox
-    Friend WithEvents CheckBox1 As CheckBox
+    Friend WithEvents cb2 As CheckBox
+    Friend WithEvents cb1 As CheckBox
     Friend WithEvents db4 As Button
     Friend WithEvents db2 As Button
     Friend WithEvents drb2 As RadioButton
