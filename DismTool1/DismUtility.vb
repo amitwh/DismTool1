@@ -5,6 +5,7 @@
 
 Imports System
 Imports System.Diagnostics
+Imports System.Globalization
 Imports System.IO
 Imports System.ComponentModel
 Imports System.Threading
@@ -26,6 +27,8 @@ Public Class DismUtility
     Dim selfiledlg, ofdlg1 As New OpenFileDialog
     Dim mtfolder As New FolderBrowserDialog
     Dim tworker As BackgroundWorker
+    Public WithEvents bgwWorker1 As BackgroundWorker
+
 
 
     Public Function add_driver()
@@ -636,6 +639,15 @@ Public Class DismUtility
             Application.DoEvents()
         End While
         pro.Close()
+    End Sub
+
+    Private Sub MenuStrip1_ItemClicked(sender As Object, e As ToolStripItemClickedEventArgs) Handles MenuStrip1.ItemClicked
+
+    End Sub
+
+    Private Sub TabPage6_Click(sender As Object, e As EventArgs) Handles TabPage6.Click
+
+
     End Sub
 
     Private Sub ab5_Click(sender As Object, e As EventArgs) Handles ab5.Click
